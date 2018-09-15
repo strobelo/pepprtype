@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "2431798042",
+    "firebase_url": "https://pquad-97953.firebaseio.com",
+    "project_id": "pquad-97953",
+    "storage_bucket": "pquad-97953.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2431798042:android:44c1ee7e36e713d2",
+        "android_client_info": {
+          "package_name": "com.pinkpeppr.pepprtype"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2431798042-9tkeqmdspndvs18f8s0q2apcmf9fmp8s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_KMQQ0Kc_gInDmbEv_YlN4wYCzN18pU4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
