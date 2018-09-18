@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'home.dart';
+import 'dashboard.dart';
 import 'stats.dart';
+import 'login.dart';
+import 'theme.dart';
 
 void main() => runApp(new MyApp());
 
 Map<int, Widget> screenMap = <int, Widget> {
-  0: new HomeScreen(),
+  0: new DashboardScreen(),
   1: new StatsScreen(),
 }; 
 
@@ -18,16 +20,31 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  int _currentIndex = 0;
+  
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Cunts',
-      home: new Scaffold(
+      routes: {
+        '/': (context) => new LoginScreen(),
+        '/home': (context) => new Home(),
+      },
+      theme: pinkTheme(),
+      
+    );
+  }
+}
+
+class _HomeState extends State<Home> {
+  int _currentIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
         bottomNavigationBar: new BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             new BottomNavigationBarItem(
-              title: new Text('Home'),
+              title: new Text('Dashboard'),
               icon: new Icon(Icons.home),
             ),
             new BottomNavigationBarItem(
@@ -43,14 +60,13 @@ class _MyAppState extends State<MyApp> {
           currentIndex: _currentIndex,
         ),
         body: screenMap[_currentIndex],
-      ),
-      theme: new ThemeData(
-        primaryColor: Colors.pink[500]
-      ),
-      
-    );
+      );
   }
 }
 
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => new _HomeState();
+}
 
 
