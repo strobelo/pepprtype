@@ -1,55 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'home.dart';
+import 'stats.dart';
 
 void main() => runApp(new MyApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp();
+Map<int, Widget> screenMap = <int, Widget> {
+  0: new HomeScreen(),
+  1: new StatsScreen(),
+}; 
 
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => new _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Cunts',
-      home: const MyHomePage(title: 'Cunts'),
+      home: new Scaffold(
+        bottomNavigationBar: new BottomNavigationBar(
+          items: <BottomNavigationBarItem>[
+            new BottomNavigationBarItem(
+              title: new Text('Home'),
+              icon: new Icon(Icons.home),
+            ),
+            new BottomNavigationBarItem(
+              title: new Text('Stats'),
+              icon: new Icon(Icons.insert_chart)
+            )
+          ],
+          onTap: (int index)  {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          currentIndex: _currentIndex,
+        ),
+        body: screenMap[_currentIndex],
+      ),
       theme: new ThemeData(
         primaryColor: Colors.pink[500]
       ),
+      
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key key, this.title}) : super(key: key);
 
-  final String title;
 
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(title: new Text(title)),
-      body: new StreamBuilder(
-          stream: Firestore.instance.collection('test').snapshots(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) return const Text('Loading...');
-            return new ListView.builder(
-                itemCount: snapshot.data.documents.length,
-                padding: const EdgeInsets.only(top: 10.0),
-                itemExtent: 25.0,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot ds = snapshot.data.documents[index];
-                  return new Text(" ${ds['name']} is cunt? ${ds['isCunt']}");
-                }
-            );
-          }),
-    );
-  }
-}
-
-// class LittleStatefulDude extends StatefulWidget {
-//   @override
-//   _LittleStatefulDudeState createState() => _LittleStatefulDudeState();
-// }
-
-// class _LittleStatefulDudeState extends State<LittleStatefulDude> {
-//   bool 
-// }
